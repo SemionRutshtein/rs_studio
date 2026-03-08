@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Red Stone Studio — AI Automation, Bots, Custom Software | Israel</title>
 <meta name="description" content="Red Stone Studio builds AI automation systems, intelligent bots, and custom software for businesses. Founded by Semion Rutshtein in Bat Yam, Israel.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='20,2 2,18 20,18' fill='%23C0392B'/%3E%3Cpolygon points='20,2 38,18 20,18' fill='%23E74C3C'/%3E%3Cpolygon points='2,18 20,38 20,18' fill='%23922B21'/%3E%3Cpolygon points='38,18 20,38 20,18' fill='%236E1A10'/%3E%3Cpolygon points='20,11 26,16 20,21 14,16' fill='%23F39C12'/%3E%3Cpolygon points='20,2 38,18 20,38 2,18' stroke='%23E74C3C' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -93,6 +94,23 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 .nav-inner{display:flex;align-items:center;justify-content:space-between;
   width:100%;max-width:1400px;margin:0 auto}
 .nav-logo{display:flex;align-items:center;gap:10px;z-index:1001}
+/* ── Logo animations ── */
+@keyframes logo-glow {
+  0%,100% { filter: drop-shadow(0 0 3px rgba(231,76,60,.9)) drop-shadow(0 0 1px rgba(231,76,60,.5)); }
+  50%     { filter: drop-shadow(0 0 10px rgba(231,76,60,1)) drop-shadow(0 0 22px rgba(231,76,60,.55)) drop-shadow(0 0 38px rgba(243,156,18,.22)); }
+}
+@keyframes logo-ring-a {
+  0%   { stroke-dashoffset: 96; stroke: #E74C3C; }
+  50%  { stroke: #F39C12; }
+  100% { stroke-dashoffset: 0;  stroke: #E74C3C; }
+}
+@keyframes logo-ring-b {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -96; }
+}
+.logo-icon { animation: logo-glow 2.5s ease-in-out infinite; }
+.logo-ring-a { stroke-dasharray: 30 66; animation: logo-ring-a 3s linear infinite; }
+.logo-ring-b { stroke-dasharray: 14 82; animation: logo-ring-b 2.2s linear infinite reverse; }
 .nav-logo svg{width:36px;height:36px;flex-shrink:0}
 .nav-logo-text{font-family:var(--font-heading);font-size:1.5rem;letter-spacing:3px;line-height:1.1}
 .nav-logo-text span{display:block;font-size:.7rem;letter-spacing:5px;color:var(--text-secondary)}
@@ -479,10 +497,34 @@ select.form-field{cursor:pointer;appearance:none}
 <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="Red Stone Studio Home">
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="4" width="32" height="32" rx="3" fill="#C0392B"/>
-        <rect x="10" y="10" width="20" height="20" rx="2" transform="rotate(45 20 20)" fill="#E74C3C" opacity="0.7"/>
-        <rect x="15" y="15" width="10" height="10" rx="1" fill="#F39C12" opacity="0.9"/>
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="nlg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#EB6153"/><stop offset="100%" stop-color="#A93226"/>
+          </linearGradient>
+          <linearGradient id="nlg2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C0392B"/><stop offset="100%" stop-color="#7B1D14"/>
+          </linearGradient>
+          <linearGradient id="nlg3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#F39C12"/><stop offset="100%" stop-color="#FDEBD0"/>
+          </linearGradient>
+        </defs>
+        <!-- Gem facets -->
+        <polygon points="20,2 2,18 20,18"  fill="url(#nlg1)"/>
+        <polygon points="20,2 38,18 20,18" fill="#D94535"/>
+        <polygon points="2,18 20,38 20,18" fill="url(#nlg2)"/>
+        <polygon points="38,18 20,38 20,18" fill="#6E1A10"/>
+        <!-- Divider lines -->
+        <line x1="2" y1="18" x2="38" y2="18" stroke="rgba(255,255,255,0.09)" stroke-width="0.6"/>
+        <line x1="20" y1="2" x2="20" y2="38" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>
+        <!-- Gold top accent -->
+        <polygon points="20,2 26,11 14,11" fill="url(#nlg3)" opacity="0.65"/>
+        <!-- Center jewel -->
+        <polygon points="20,11 26,16 20,21 14,16" fill="#F39C12"/>
+        <polygon points="20,11 26,16 20,16 14,16" fill="#FDEBD0" opacity="0.45"/>
+        <!-- Animated border rings -->
+        <polygon class="logo-ring-a" points="20,2 38,18 20,38 2,18" stroke="#E74C3C" stroke-width="1.5" fill="none"/>
+        <polygon class="logo-ring-b" points="20,2 38,18 20,38 2,18" stroke="rgba(243,156,18,0.55)" stroke-width="0.8" fill="none"/>
       </svg>
       <div class="nav-logo-text">RED STONE<span>STUDIO</span></div>
     </a>
@@ -1125,6 +1167,10 @@ select.form-field{cursor:pointer;appearance:none}
             <a href="tel:+972586799369">+972-058-679-9369</a>
           </div>
           <div class="contact-detail">
+            <span style="font-size:1.1rem">&#x2709;</span>
+            <a href="mailto:redstone.dev.studio@gmail.com">redstone.dev.studio@gmail.com</a>
+          </div>
+          <div class="contact-detail">
             <span style="font-size:1.1rem">&#x1F4BC;</span>
             <a href="https://www.linkedin.com/in/semion-rutshtein-5091b31b0" target="_blank" rel="noopener noreferrer">linkedin.com/in/semion-rutshtein</a>
           </div>
@@ -1135,12 +1181,14 @@ select.form-field{cursor:pointer;appearance:none}
         </div>
       </div>
       <form class="contact-form reveal" id="contactForm" aria-label="Contact form">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New inquiry from Red Stone Studio website">
         <div class="form-row">
-          <input type="text" class="form-field" placeholder="Your Name" required aria-label="Name">
-          <input type="email" class="form-field" placeholder="Email Address" required aria-label="Email">
+          <input type="text" name="name" class="form-field" placeholder="Your Name" required aria-label="Name">
+          <input type="email" name="email" class="form-field" placeholder="Email Address" required aria-label="Email">
         </div>
-        <input type="text" class="form-field" placeholder="Company / Business" aria-label="Company">
-        <select class="form-field" aria-label="Service Interest">
+        <input type="text" name="company" class="form-field" placeholder="Company / Business" aria-label="Company">
+        <select name="service" class="form-field" aria-label="Service Interest">
           <option value="" disabled selected>What are you looking to build?</option>
           <option>AI Automation (workflows, invoicing, pipelines)</option>
           <option>Bot Development (WhatsApp, Telegram, web chat)</option>
@@ -1150,7 +1198,7 @@ select.form-field{cursor:pointer;appearance:none}
           <option>AI Consulting &amp; Roadmap</option>
           <option>Not sure — need advice</option>
         </select>
-        <textarea class="form-field" placeholder="Describe the problem you want solved or the process you want automated..." rows="4" aria-label="Message"></textarea>
+        <textarea name="message" class="form-field" placeholder="Describe the problem you want solved or the process you want automated..." rows="4" aria-label="Message"></textarea>
         <button type="submit" class="submit-btn" id="submitBtn">Send Message &rarr;</button>
       </form>
     </div>
@@ -1165,10 +1213,29 @@ select.form-field{cursor:pointer;appearance:none}
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="nav-logo" aria-label="Red Stone Studio Home">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px">
-            <rect x="4" y="4" width="32" height="32" rx="3" fill="#C0392B"/>
-            <rect x="10" y="10" width="20" height="20" rx="2" transform="rotate(45 20 20)" fill="#E74C3C" opacity="0.7"/>
-            <rect x="15" y="15" width="10" height="10" rx="1" fill="#F39C12" opacity="0.9"/>
+          <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px">
+            <defs>
+              <linearGradient id="flg1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#EB6153"/><stop offset="100%" stop-color="#A93226"/>
+              </linearGradient>
+              <linearGradient id="flg2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#C0392B"/><stop offset="100%" stop-color="#7B1D14"/>
+              </linearGradient>
+              <linearGradient id="flg3" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#F39C12"/><stop offset="100%" stop-color="#FDEBD0"/>
+              </linearGradient>
+            </defs>
+            <polygon points="20,2 2,18 20,18"  fill="url(#flg1)"/>
+            <polygon points="20,2 38,18 20,18" fill="#D94535"/>
+            <polygon points="2,18 20,38 20,18" fill="url(#flg2)"/>
+            <polygon points="38,18 20,38 20,18" fill="#6E1A10"/>
+            <line x1="2" y1="18" x2="38" y2="18" stroke="rgba(255,255,255,0.09)" stroke-width="0.6"/>
+            <line x1="20" y1="2" x2="20" y2="38" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>
+            <polygon points="20,2 26,11 14,11" fill="url(#flg3)" opacity="0.65"/>
+            <polygon points="20,11 26,16 20,21 14,16" fill="#F39C12"/>
+            <polygon points="20,11 26,16 20,16 14,16" fill="#FDEBD0" opacity="0.45"/>
+            <polygon class="logo-ring-a" points="20,2 38,18 20,38 2,18" stroke="#E74C3C" stroke-width="1.5" fill="none"/>
+            <polygon class="logo-ring-b" points="20,2 38,18 20,38 2,18" stroke="rgba(243,156,18,0.55)" stroke-width="0.8" fill="none"/>
           </svg>
           <div class="nav-logo-text" style="font-size:1.2rem">RED STONE<span>STUDIO</span></div>
         </a>
@@ -1195,6 +1262,7 @@ select.form-field{cursor:pointer;appearance:none}
       <div class="footer-col">
         <h4>CONTACT</h4>
         <a href="tel:+972586799369">+972-058-679-9369</a>
+        <a href="mailto:redstone.dev.studio@gmail.com">redstone.dev.studio@gmail.com</a>
         <a href="https://www.linkedin.com/in/semion-rutshtein-5091b31b0" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
         <a href="#contact">Bat Yam, Israel</a>
         <a href="#contact">Free Consultation</a>
@@ -1405,18 +1473,41 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-/* ─── CONTACT FORM SUCCESS ──────────────── */
+/* ─── CONTACT FORM SUBMISSION ──────────── */
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
-contactForm.addEventListener('submit', e => {
+contactForm.addEventListener('submit', async e => {
   e.preventDefault();
-  submitBtn.classList.add('success');
-  submitBtn.innerHTML = '&#x2714; Message Sent! We\'ll reply within 24h';
-  setTimeout(() => {
-    submitBtn.classList.remove('success');
-    submitBtn.innerHTML = 'Send Message &rarr;';
-    contactForm.reset();
-  }, 4000);
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending&hellip;';
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/redstone.dev.studio@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(contactForm)
+    });
+    const data = await res.json();
+    if (data.success === 'true' || data.success === true) {
+      submitBtn.classList.add('success');
+      submitBtn.innerHTML = '&#x2714; Message Sent! We\'ll reply within 24h';
+      contactForm.reset();
+      setTimeout(() => {
+        submitBtn.classList.remove('success');
+        submitBtn.innerHTML = 'Send Message &rarr;';
+        submitBtn.disabled = false;
+      }, 5000);
+    } else {
+      throw new Error('send failed');
+    }
+  } catch {
+    submitBtn.innerHTML = 'Failed — email us directly';
+    submitBtn.style.background = '#7B1D14';
+    setTimeout(() => {
+      submitBtn.innerHTML = 'Send Message &rarr;';
+      submitBtn.style.background = '';
+      submitBtn.disabled = false;
+    }, 4000);
+  }
 });
 
 })();
