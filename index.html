@@ -323,22 +323,16 @@
       flex-direction: column;
     }
 
-    @keyframes logo-letters {
-      0%, 100% { letter-spacing: 0.05em; opacity: 1; }
-      50%       { letter-spacing: 0.18em; opacity: 0.85; }
-    }
     .logo-main {
       font-family: var(--font-hero);
       font-size: 22px;
       color: var(--text-primary);
       line-height: 1;
       margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      min-width: 108px;
       letter-spacing: 0.05em;
-      animation: logo-letters 2.8s ease-in-out infinite;
-    }
-    .logo-container:hover .logo-main,
-    a:hover .logo-main {
-      animation-duration: 0.8s;
     }
 
     .logo-sub {
@@ -2384,7 +2378,7 @@
           <line class="gem-shine" x1="18" y1="16" x2="18" y2="3" stroke="#ff7a6b" stroke-width="0.6" opacity="0.35"/>
         </svg>
         <div class="logo-text-group">
-          <span class="logo-main space-between">RED STONE</span>
+          <span class="logo-main space-between"><span>RED</span><span>STONE</span></span>
           <span class="logo-sub">DEV STUDIO</span>
         </div>
       </a>
@@ -3429,7 +3423,7 @@
             <path d="M5 30 L50 60 L50 95 Z" fill="#902A20" opacity="0.8" />
           </svg>
           <div class="logo-text-group">
-            <span class="logo-main space-between">RED STONE</span>
+            <span class="logo-main space-between"><span>RED</span><span>STONE</span></span>
             <span class="logo-sub">DEV STUDIO</span>
           </div>
         </a>
