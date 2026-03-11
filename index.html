@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;600;700&display=swap"
     rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' fill='%230A0A0F'/%3E%3Cpolygon points='18,3 33,14 26,33 10,33 3,14' fill='%2313131C' stroke='%232A2A35' stroke-width='0.8'/%3E%3Cpolygon points='18,3 33,14 18,16' fill='%23E74C3C' opacity='0.9'/%3E%3Cpolygon points='18,3 3,14 18,16' fill='%23C0392B' opacity='0.85'/%3E%3Cpolygon points='3,14 18,16 18,33 10,33' fill='%238B1A10' opacity='0.9'/%3E%3Cpolygon points='33,14 18,16 18,33 26,33' fill='%23C0392B' opacity='0.75'/%3E%3C/svg%3E" />
   <style>
     :root {
       --bg-deep: #0A0A0F;
@@ -288,8 +289,33 @@
     }
 
     .logo-svg {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    /* ── Animated gem logo ── */
+    @keyframes gem-pulse {
+      0%, 100% { opacity: 0.9; filter: drop-shadow(0 0 0px #E74C3C); }
+      50%       { opacity: 1;   filter: drop-shadow(0 0 6px rgba(231,76,60,0.8)); }
+    }
+    @keyframes gem-shimmer {
+      0%, 100% { opacity: 0.15; }
+      50%       { opacity: 0.7; }
+    }
+    .gem-facet-a {
+      animation: gem-pulse 2.8s ease-in-out infinite;
+    }
+    .gem-shine {
+      animation: gem-shimmer 2.8s ease-in-out infinite;
+      animation-delay: 0.4s;
+    }
+    .logo-container:hover .logo-svg,
+    a:hover .logo-svg {
+      filter: drop-shadow(0 0 8px rgba(231,76,60,0.5));
+    }
+    .logo-container:hover .gem-facet-a {
+      animation-duration: 0.8s;
     }
 
     .logo-text-group {
@@ -2338,10 +2364,14 @@
   <nav class="nav" id="navbar">
     <div class="container nav-container">
       <a href="#" class="logo-container">
-        <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 5 L95 30 L50 95 L5 30 Z" fill="#C0392B" />
-          <path d="M50 5 L95 30 L50 60 Z" fill="#E74C3C" opacity="0.6" />
-          <path d="M5 30 L50 60 L50 95 Z" fill="#902A20" opacity="0.8" />
+        <svg class="logo-svg" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="18,3 33,14 26,33 10,33 3,14" fill="#13131C" stroke="#2A2A35" stroke-width="0.8"/>
+          <polygon class="gem-facet-a" points="18,3 33,14 18,16" fill="#E74C3C" opacity="0.9"/>
+          <polygon points="18,3 3,14 18,16" fill="#C0392B" opacity="0.85"/>
+          <polygon points="3,14 18,16 18,33 10,33" fill="#8B1A10" opacity="0.9"/>
+          <polygon points="33,14 18,16 18,33 26,33" fill="#C0392B" opacity="0.75"/>
+          <line x1="3" y1="14" x2="33" y2="14" stroke="#E74C3C" stroke-width="0.5" opacity="0.4"/>
+          <line class="gem-shine" x1="18" y1="16" x2="18" y2="3" stroke="#ff7a6b" stroke-width="0.6" opacity="0.35"/>
         </svg>
         <div class="logo-text-group">
           <span class="logo-main space-between">RED STONE</span>
