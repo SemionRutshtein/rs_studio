@@ -2452,6 +2452,12 @@
       ></video>
       <!-- Dark overlay for text readability -->
       <div style="position:absolute;inset:0;background:rgba(10,10,15,0.45);pointer-events:none;z-index:1;"></div>
+      <!-- Top fade — blends into hero above -->
+      <div style="position:absolute;top:0;left:0;right:0;height:18vh;background:linear-gradient(to bottom,#0A0A0F 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
+      <!-- Bottom fade — blends into market strip below -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:18vh;background:linear-gradient(to top,#0A0A0F 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
+      <!-- Left/right side vignette -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,#0A0A0F 100%);pointer-events:none;z-index:2;"></div>
 
       <!-- Overlay label 1: AI Automation -->
       <div class="vid-label" id="vid-label-1" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;padding:0 1.5rem;box-sizing:border-box;opacity:0;pointer-events:none;z-index:2;">
