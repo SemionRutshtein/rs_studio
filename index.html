@@ -2356,6 +2356,8 @@
       }
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -2434,6 +2436,52 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M6 9l6 6 6-6" />
       </svg>
+    </div>
+  </section>
+
+  <!-- ═══ SCROLL VIDEO SECTION ═══ -->
+  <section id="macbook-video-section" style="height:300vh;position:relative;">
+    <div id="macbook-pin" style="position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--bg-deep);">
+      <video
+        id="macbook-video"
+        src="videos/macbook-explode.mp4"
+        muted
+        playsinline
+        preload="auto"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"
+      ></video>
+      <!-- Dark overlay for text readability -->
+      <div style="position:absolute;inset:0;background:rgba(10,10,15,0.45);pointer-events:none;z-index:1;"></div>
+      <!-- Top fade — blends into hero above -->
+      <div style="position:absolute;top:0;left:0;right:0;height:18vh;background:linear-gradient(to bottom,#0A0A0F 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
+      <!-- Bottom fade — blends into market strip below -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:18vh;background:linear-gradient(to top,#0A0A0F 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
+      <!-- Left/right side vignette -->
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,#0A0A0F 100%);pointer-events:none;z-index:2;"></div>
+
+      <!-- Overlay label 1: AI Automation -->
+      <div class="vid-label" id="vid-label-1" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;padding:0 1.5rem;box-sizing:border-box;opacity:0;pointer-events:none;z-index:2;">
+        <h2 style="font-family:var(--font-hero);letter-spacing:0.05em;font-size:clamp(2.2rem,6vw,5rem);color:var(--red-bright);text-shadow:0 0 32px var(--glow-red),0 0 8px var(--glow-red);text-align:center;word-break:break-word;">AI Automation</h2>
+        <div style="width:60px;height:2px;background:var(--gold);flex-shrink:0;"></div>
+        <p style="font-family:var(--font-ui);font-size:clamp(0.9rem,2.5vw,1.2rem);color:var(--text-primary);max-width:min(520px,100%);text-align:center;">Eliminate repetitive work with intelligent pipelines</p>
+      </div>
+
+      <!-- Overlay label 2: Intelligent Bots -->
+      <div class="vid-label" id="vid-label-2" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;padding:0 1.5rem;box-sizing:border-box;opacity:0;pointer-events:none;z-index:2;">
+        <h2 style="font-family:var(--font-hero);letter-spacing:0.05em;font-size:clamp(2.2rem,6vw,5rem);color:var(--red-bright);text-shadow:0 0 32px var(--glow-red),0 0 8px var(--glow-red);text-align:center;word-break:break-word;">Intelligent Bots</h2>
+        <div style="width:60px;height:2px;background:var(--gold);flex-shrink:0;"></div>
+        <p style="font-family:var(--font-ui);font-size:clamp(0.9rem,2.5vw,1.2rem);color:var(--text-primary);max-width:min(520px,100%);text-align:center;">24/7 customer agents built on Claude AI &amp; OpenAI</p>
+      </div>
+
+      <!-- Overlay label 3: Production-Grade Architecture -->
+      <div class="vid-label" id="vid-label-3" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;padding:0 1.5rem;box-sizing:border-box;opacity:0;pointer-events:none;z-index:2;">
+        <h2 style="font-family:var(--font-hero);letter-spacing:0.05em;font-size:clamp(1.8rem,5vw,5rem);color:var(--red-bright);text-shadow:0 0 32px var(--glow-red),0 0 8px var(--glow-red);text-align:center;word-break:break-word;">Production-Grade Architecture</h2>
+        <div style="width:60px;height:2px;background:var(--gold);flex-shrink:0;"></div>
+        <p style="font-family:var(--font-ui);font-size:clamp(0.9rem,2.5vw,1.2rem);color:var(--text-primary);max-width:min(520px,100%);text-align:center;">Kafka &middot; PostgreSQL &middot; MongoDB &middot; Redis &mdash; built to scale</p>
+      </div>
+
+      <!-- Scroll hint -->
+      <div id="vid-scroll-hint" style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--font-hero);letter-spacing:0.15em;font-size:1rem;color:var(--text-muted);z-index:3;pointer-events:none;white-space:nowrap;">&#9660; SCROLL</div>
     </div>
   </section>
 
@@ -3872,6 +3920,102 @@
         });
       }, 5000);
     }
+  </script>
+
+  <!-- ═══ GSAP SCROLL VIDEO INIT ═══ -->
+  <script>
+    (function () {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Fix mobile browser address-bar resize jank
+      ScrollTrigger.normalizeScroll(true);
+
+      var video = document.getElementById('macbook-video');
+      var section = document.getElementById('macbook-video-section');
+      var hint = document.getElementById('vid-scroll-hint');
+
+      function initVideoScroll() {
+        // Scrub video currentTime to scroll progress
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+          onUpdate: function (self) {
+            if (video.duration && isFinite(video.duration)) {
+              video.currentTime = self.progress * video.duration;
+            }
+          }
+        });
+
+        // FIX: anchor each timeline to totalDuration=1 so positions 0–1
+        // map 1:1 to scroll progress (without this, labels fire at wrong positions)
+        function labelTimeline(el, startP) {
+          var tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: true
+            }
+          });
+          tl.set(el, { opacity: 0 }, 0);
+          tl.to(el, { opacity: 1, duration: 0.06, ease: 'none' }, startP);
+          tl.to(el, { opacity: 1, duration: 0.12, ease: 'none' }, startP + 0.06);
+          tl.to(el, { opacity: 0, duration: 0.06, ease: 'none' }, startP + 0.18);
+          tl.set(el, { opacity: 0 }, 1); // anchors totalDuration to 1.0
+        }
+
+        labelTimeline(document.getElementById('vid-label-1'), 0.15);
+        labelTimeline(document.getElementById('vid-label-2'), 0.40);
+        labelTimeline(document.getElementById('vid-label-3'), 0.65);
+
+        // Scroll hint: fades out by 0.08 progress
+        // FIX: anchor to 1.0 so the 0–0.08 range maps correctly to 0–8% scroll
+        var hintTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true
+          }
+        });
+        hintTl.set(hint, { opacity: 1 }, 0);
+        hintTl.to(hint, { opacity: 0, duration: 0.08, ease: 'none' }, 0);
+        hintTl.set(hint, { opacity: 0 }, 1); // anchors totalDuration to 1.0
+      }
+
+      // iOS Safari may not preload video until after user interaction.
+      // We attempt a silent play/pause unlock on first touch so that
+      // loadedmetadata fires and currentTime seeking works while scrolling.
+      function setupWhenReady() {
+        if (video.readyState >= 1) {
+          initVideoScroll();
+        } else {
+          video.addEventListener('loadedmetadata', initVideoScroll, { once: true });
+        }
+      }
+
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        var unlocked = false;
+        function iosUnlock() {
+          if (unlocked) return;
+          unlocked = true;
+          video.play().then(function () {
+            video.pause();
+            video.currentTime = 0;
+          }).catch(function () { /* ignore */ }).finally(setupWhenReady);
+          document.removeEventListener('touchstart', iosUnlock);
+        }
+        document.addEventListener('touchstart', iosUnlock, { passive: true });
+        // Also init without unlock in case metadata is already available
+        setupWhenReady();
+      } else {
+        setupWhenReady();
+      }
+    })();
   </script>
 
 </body>
