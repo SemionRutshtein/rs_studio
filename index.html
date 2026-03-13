@@ -492,7 +492,7 @@
     }
 
     .hero-title {
-      font-size: clamp(52px, 8vw, 100px);
+      font-size: clamp(40px, 10vw, 100px);
       line-height: 0.95;
       margin-bottom: 30px;
     }
@@ -649,7 +649,7 @@
     }
 
     .section-title {
-      font-size: clamp(40px, 6vw, 64px);
+      font-size: clamp(30px, 8vw, 64px);
       line-height: 1.1;
       margin-bottom: 24px;
     }
@@ -951,7 +951,7 @@
 
     .svg-network {
       width: 100%;
-      height: 400px;
+      height: clamp(220px, 55vw, 400px);
       display: block;
       overflow: visible;
     }
@@ -1182,6 +1182,10 @@
       .process-grid {
         grid-template-columns: 1fr;
       }
+
+      .fd-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     /* ═══ STATS COUNTER ═══ */
@@ -1219,7 +1223,7 @@
 
     .stat-number {
       font-family: var(--font-hero);
-      font-size: clamp(48px, 6vw, 80px);
+      font-size: clamp(36px, 10vw, 80px);
       color: var(--red-bright);
       line-height: 1;
       margin-bottom: 12px;
@@ -1283,7 +1287,7 @@
 
     .panel-title {
       font-family: var(--font-hero);
-      font-size: 28px;
+      font-size: clamp(20px, 5.5vw, 28px);
       letter-spacing: 0.05em;
     }
 
@@ -2353,6 +2357,95 @@
 
       .contact-title {
         font-size: clamp(40px, 10vw, 52px);
+      }
+    }
+    /* ═══ MOBILE — iPhone 16 / 390px ═══ */
+    @media (max-width: 480px) {
+      /* Layout */
+      .container {
+        padding: 0 16px;
+      }
+
+      .section-padding {
+        padding: 72px 0;
+      }
+
+      .section-header {
+        margin-bottom: 40px;
+      }
+
+      .section-sub {
+        font-size: 15px;
+      }
+
+      /* Hero */
+      .hero-sub {
+        font-size: 16px;
+      }
+
+      .hero-badges {
+        padding: 0 16px;
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+        text-align: center;
+      }
+
+      /* Services */
+      .services {
+        padding: 72px 0;
+      }
+
+      .service-card {
+        padding: 20px;
+      }
+
+      .service-tag {
+        top: 16px;
+        right: 16px;
+      }
+
+      .service-title {
+        font-size: 20px;
+      }
+
+      /* Dashboard fake metrics — 2 col instead of 3 */
+      .fd-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Panels (deep-dives) */
+      .panel-header {
+        padding: 16px 20px;
+      }
+
+      .panel-inner {
+        padding: 24px 20px;
+        gap: 20px;
+      }
+
+      /* Stats */
+      .stats-section {
+        padding: 48px 0;
+      }
+
+      /* ROI */
+      .roi-widget {
+        padding: 24px 20px;
+      }
+
+      /* FAQ accordion */
+      .accordion-header {
+        padding: 18px 20px;
+      }
+
+      .accordion-inner {
+        padding: 0 20px 20px;
+      }
+
+      /* Contact */
+      .contact-section {
+        padding: 72px 0;
       }
     }
   </style>
@@ -3659,7 +3752,8 @@
       }
     }
 
-    for (let i = 0; i < 90; i++) particles.push(new Particle()); function animateCanvas() {
+    const particleCount = window.innerWidth < 768 ? 40 : 90;
+    for (let i = 0; i < particleCount; i++) particles.push(new Particle()); function animateCanvas() {
       ctx.clearRect(0, 0, width,
         height); for (let i = 0; i < particles.length; i++) {
           particles[i].update(); particles[i].draw(); for (let j = i + 1;
