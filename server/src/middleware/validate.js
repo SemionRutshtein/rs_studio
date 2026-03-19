@@ -8,6 +8,10 @@ function validateIntake(req, res, next) {
     return res.status(400).json({ error: 'services must be a non-empty array' })
   }
 
+  if (!body.services.every(s => typeof s === 'string' && s.trim().length > 0)) {
+    return res.status(400).json({ error: 'each service must be a non-empty string' })
+  }
+
   for (const field of REQUIRED_STRINGS) {
     if (!body[field] || typeof body[field] !== 'string' || !body[field].trim()) {
       return res.status(400).json({ error: `${field} is required` })

@@ -59,4 +59,11 @@ describe('validateIntake', () => {
     validateIntake(req, res, next)
     expect(next).toHaveBeenCalled()
   })
+
+  test('rejects services array with non-string items', () => {
+    const req = { body: { ...validBody, services: [null, 123] } }
+    const res = mockRes()
+    validateIntake(req, res, jest.fn())
+    expect(res.status).toHaveBeenCalledWith(400)
+  })
 })

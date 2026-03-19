@@ -1,5 +1,10 @@
 const nodemailer = require('nodemailer')
 
+// strip CR/LF to prevent email header injection
+function sanitize(str) {
+  return String(str).replace(/[\r\n]/g, ' ')
+}
+
 function createTransport() {
   return nodemailer.createTransport({
     service: 'gmail',
@@ -15,7 +20,7 @@ function formatEmail(data) {
   const line = '━'.repeat(32)
 
   return {
-    subject: `New Client Intake — ${data.company} (${services})`,
+    subject: `New Client Intake — ${sanitize(data.company)} (${sanitize(services)})`,
     text: `
 ${line}
 NEW CLIENT INTAKE SUBMISSION
