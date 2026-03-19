@@ -236,12 +236,12 @@ export default function Intake() {
             </div>
             <div className="intake-field">
               <label htmlFor="email">Email</label>
-              <input id="email" type="email" value={form.email} onChange={e => update('email', e.target.value)} />
+              <input id="email" type="email" aria-label="Email" value={form.email} onChange={e => update('email', e.target.value)} />
               {errors.email && <p className="intake-error">{errors.email}</p>}
             </div>
             <div className="intake-field">
               <label htmlFor="company">Company name</label>
-              <input id="company" type="text" value={form.company} onChange={e => update('company', e.target.value)} />
+              <input id="company" type="text" aria-label="Company name" value={form.company} onChange={e => update('company', e.target.value)} />
               {errors.company && <p className="intake-error">{errors.company}</p>}
             </div>
             <div className="intake-field">
