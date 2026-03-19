@@ -12,8 +12,6 @@ const ROW1 = TECH.slice(0, half)
 const ROW2 = TECH.slice(half)
 
 function MarqueeRow({ items, direction }) {
-  // Duplicate items for seamless infinite scroll
-  const all = [...items, ...items]
   return (
     <div className={`marquee marquee-${direction}`}>
       <div className="marquee-content">

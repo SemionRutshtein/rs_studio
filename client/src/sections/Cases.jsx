@@ -126,7 +126,7 @@ const PANELS = [
     titleClass: 'text-red',
     title: 'Invoice-to-ERP Pipeline',
     preview: 'Replaced 40% of manual entry workload using LLMs',
-    animation: <DataStreamCanvas />,
+    animation: DataStreamCanvas,
     meta: [
       { label: 'Client', value: 'Finance department, 500+ invoices/month' },
       { label: 'Problem', value: '3 staff spending 40% of time on manual invoice entry' },
@@ -145,7 +145,7 @@ const PANELS = [
     titleClass: 'text-gold',
     title: 'Real Estate Closer Bot',
     preview: 'Qualified leads and booked viewings 24/7 on WhatsApp',
-    animation: <ReactivePulse />,
+    animation: ReactivePulse,
     meta: [
       { label: 'Client', value: 'Real estate agency, Tel Aviv' },
       { label: 'Problem', value: 'Agents missing leads outside business hours' },
@@ -164,7 +164,7 @@ const PANELS = [
     titleClass: 'text-red',
     title: 'E-Commerce Event Layer',
     preview: 'Real-time inventory sync handling 10,000+ users',
-    animation: <GridRise />,
+    animation: GridRise,
     meta: [
       { label: 'Client', value: 'E-commerce platform outgrowing Shopify' },
       { label: 'Problem', value: 'Inventory sync failures, 2-3 second page loads, lost sales' },
@@ -183,7 +183,7 @@ const PANELS = [
     titleClass: 'text-gold',
     title: 'Executive Intelligence Dashboard',
     preview: 'Unified real-time data spanning 6 disparate APIs',
-    animation: <GlassCards />,
+    animation: GlassCards,
     meta: [
       { label: 'Client', value: 'SaaS company CEO' },
       { label: 'Problem', value: 'KPIs scattered across 6 different tools, no single view' },
@@ -203,7 +203,7 @@ const PANELS = [
     titleClass: 'text-red',
     title: 'Omnichannel Commerce Sync',
     preview: 'Eliminated 4 manual data-entry steps per order',
-    animation: <NeuralLink />,
+    animation: NeuralLink,
     meta: [
       { label: 'Client', value: 'Multi-channel retailer (5+ SaaS tools)' },
       { label: 'Problem', value: 'Sale in Shopify required manual updates in 4 other systems' },
@@ -224,7 +224,7 @@ const PANELS = [
     titleClass: 'text-gold',
     title: 'AI Readiness Audit',
     preview: 'Identified ₪15,000/month recurring ROI within 48h',
-    animation: <RevealAudit />,
+    animation: RevealAudit,
     meta: [
       { label: 'Client', value: 'Law firm, 45 employees' },
       {
@@ -257,7 +257,7 @@ function Panel({ panel, index, isOpen, onToggle }) {
       </div>
       <div className="panel-content">
         <div className="panel-inner">
-          <div className="panel-animation">{panel.animation}</div>
+          <div className="panel-animation">{isOpen && <panel.animation />}</div>
           <div className="panel-details">
             <div className="panel-meta">
               {panel.meta.map((row, i) => (
