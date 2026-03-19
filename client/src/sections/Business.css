@@ -263,9 +263,12 @@
     gap: 40px;
   }
 
-  .split-reverse {
-    flex-direction: column-reverse;
-    display: flex;
+  .split-reverse > *:first-child {
+    order: 2;
+  }
+
+  .split-reverse > *:last-child {
+    order: 1;
   }
 }
 
