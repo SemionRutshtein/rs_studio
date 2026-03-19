@@ -1,0 +1,119 @@
+/* ═══ MACBOOK SCROLL VIDEO SECTION ═══ */
+.macbook-video-section {
+  height: 300vh;
+  position: relative;
+}
+
+.video-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-deep);
+}
+
+.macbook-video-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlays */
+.vid-overlay {
+  position: absolute;
+  pointer-events: none;
+}
+
+.vid-overlay-dark {
+  inset: 0;
+  background: rgba(10, 10, 15, 0.45);
+  z-index: 1;
+}
+
+.vid-overlay-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18vh;
+  background: linear-gradient(to bottom, #0A0A0F 0%, transparent 100%);
+  z-index: 2;
+}
+
+.vid-overlay-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 18vh;
+  background: linear-gradient(to top, #0A0A0F 0%, transparent 100%);
+  z-index: 2;
+}
+
+.vid-overlay-vignette {
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, #0A0A0F 100%);
+  z-index: 2;
+}
+
+/* Labels */
+.vid-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.vid-label-title {
+  font-family: var(--font-hero);
+  letter-spacing: 0.05em;
+  font-size: clamp(2.2rem, 6vw, 5rem);
+  color: var(--red-bright);
+  text-shadow: 0 0 32px var(--glow-red), 0 0 8px var(--glow-red);
+  text-align: center;
+  word-break: break-word;
+}
+
+.vid-label-title--sm {
+  font-size: clamp(1.8rem, 5vw, 5rem);
+}
+
+.vid-label-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.vid-label-text {
+  font-family: var(--font-ui);
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  color: var(--text-primary);
+  max-width: min(520px, 100%);
+  text-align: center;
+}
+
+/* Scroll hint */
+.vid-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-hero);
+  letter-spacing: 0.15em;
+  font-size: 1rem;
+  color: var(--text-muted);
+  z-index: 3;
+  pointer-events: none;
+  white-space: nowrap;
+}
