@@ -6,6 +6,9 @@ import Process from '../sections/Process'
 import Stats from '../sections/Stats'
 import Cases from '../sections/Cases'
 import TechStack from '../sections/TechStack'
+import ROICalculator from '../sections/ROICalculator'
+import FAQ from '../sections/FAQ'
+import Contact from '../sections/Contact'
 
 export default function Home() {
   return (
@@ -18,6 +21,9 @@ export default function Home() {
       <Stats />
       <Cases />
       <TechStack />
+      <ROICalculator />
+      <FAQ />
+      <Contact />
     </main>
   )
 }
