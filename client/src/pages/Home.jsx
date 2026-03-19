@@ -3,6 +3,9 @@ import MacbookScroll from '../sections/MacbookScroll'
 import Services from '../sections/Services'
 import Business from '../sections/Business'
 import Process from '../sections/Process'
+import Stats from '../sections/Stats'
+import Cases from '../sections/Cases'
+import TechStack from '../sections/TechStack'
 
 export default function Home() {
   return (
@@ -12,6 +15,9 @@ export default function Home() {
       <Services />
       <Business />
       <Process />
+      <Stats />
+      <Cases />
+      <TechStack />
     </main>
   )
 }
