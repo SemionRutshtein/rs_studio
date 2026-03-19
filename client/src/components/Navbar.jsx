@@ -40,7 +40,7 @@ export default function Navbar() {
   return (
     <nav className={`nav${scrolled ? ' scrolled' : ''}`} id="navbar">
       <div className="container nav-container">
-        <a href="/" className="logo-container">
+        <Link to="/" className="logo-container">
           <svg
             className="logo-svg"
             viewBox="0 0 40 40"
@@ -91,7 +91,7 @@ export default function Navbar() {
             </span>
             <span className="logo-sub">DEV STUDIO</span>
           </div>
-        </a>
+        </Link>
 
         <ul className={`nav-links${menuOpen ? ' open' : ''}`} id="nav-links">
           {NAV_LINKS.map((l, i) => (

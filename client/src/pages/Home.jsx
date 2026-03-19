@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main>{/* sections will be added here */}</main>
+  return <main style={{ minHeight: '100vh' }}>{/* sections will be added here */}</main>
 }
