@@ -49,7 +49,7 @@ export default function ROICalculator() {
               min="1"
               max="50"
               value={team}
-              onChange={e => setTeam(e.target.value)}
+              onChange={e => setTeam(Number(e.target.value))}
             />
           </div>
 
@@ -60,7 +60,7 @@ export default function ROICalculator() {
                 type="number"
                 value={rate}
                 min="1"
-                onChange={e => setRate(e.target.value)}
+                onChange={e => setRate(Number(e.target.value))}
               />
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function ROICalculator() {
               min="1"
               max="40"
               value={hours}
-              onChange={e => setHours(e.target.value)}
+              onChange={e => setHours(Number(e.target.value))}
             />
           </div>
 
