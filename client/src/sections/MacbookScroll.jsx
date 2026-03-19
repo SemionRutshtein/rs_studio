@@ -111,6 +111,7 @@ export default function MacbookScroll() {
     }
 
     return () => {
+      ScrollTrigger.normalizeScroll(false)
       document.removeEventListener('touchstart', iosUnlock)
       video.removeEventListener('loadedmetadata', initVideoScroll)
       triggers.forEach(t => t && t.kill && t.kill())

@@ -4,10 +4,11 @@ import './Hero.css'
 
 export default function Hero() {
   const canvasRef = useRef(null)
+  const heroRef = useRef(null)
 
   // Trigger word-reveal animation on mount
   useEffect(() => {
-    const words = document.querySelectorAll('.hero-word')
+    const words = heroRef.current?.querySelectorAll('.hero-word')
     // Small delay so the browser paints first
     const t = setTimeout(() => {
       words.forEach(span => span.classList.add('visible'))
@@ -126,7 +127,7 @@ export default function Hero() {
   const words = headline.split(' ')
 
   return (
-    <section className="hero" id="hero">
+    <section className="hero" id="hero" ref={heroRef}>
       <canvas ref={canvasRef} id="hero-canvas" />
       <div className="hero-radial-glow" />
 
