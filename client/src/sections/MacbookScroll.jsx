@@ -9,6 +9,8 @@ export default function MacbookScroll() {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
 
+  const lastFrameRef = useRef(null)
+
   useEffect(() => {
     const video = videoRef.current
     const section = sectionRef.current
@@ -29,6 +31,12 @@ export default function MacbookScroll() {
         onUpdate: (self) => {
           if (video.duration && isFinite(video.duration)) {
             video.currentTime = self.progress * video.duration
+          }
+          // Fade in last-frame overlay at end of scroll
+          if (lastFrameRef.current) {
+            lastFrameRef.current.style.opacity = self.progress > 0.92
+              ? String((self.progress - 0.92) / 0.08)
+              : '0'
           }
         }
       })
@@ -121,14 +129,30 @@ export default function MacbookScroll() {
   return (
     <section id="macbook-video-section" ref={sectionRef} className="macbook-video-section">
       <div id="macbook-pin" className="video-sticky">
+        {/* First-frame fallback shown while video loads */}
+        <img
+          src="/images/first_frame.png"
+          alt=""
+          aria-hidden="true"
+          className="macbook-frame-img"
+        />
         <video
           ref={videoRef}
           id="macbook-video"
-          src="/videos/macbook-explode.mp4"
+          src="/videos/macbook-explode-scrub.mp4"
+          poster="/images/first_frame.png"
           muted
           playsInline
           preload="auto"
           className="macbook-video-el"
+        />
+        {/* Last-frame overlay — fades in at end of scroll */}
+        <img
+          ref={lastFrameRef}
+          src="/images/last_frame.png"
+          alt=""
+          aria-hidden="true"
+          className="macbook-frame-img macbook-last-frame"
         />
 
         {/* Dark overlay for text readability */}

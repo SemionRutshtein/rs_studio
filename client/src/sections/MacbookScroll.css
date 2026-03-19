@@ -13,6 +13,7 @@
   background: var(--bg-deep);
 }
 
+.macbook-frame-img,
 .macbook-video-el {
   position: absolute;
   inset: 0;
@@ -20,6 +21,11 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.macbook-last-frame {
+  opacity: 0;
+  z-index: 1;
 }
 
 /* Overlays */
