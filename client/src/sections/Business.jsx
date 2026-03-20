@@ -100,24 +100,55 @@ function NetworkDiagram() {
       { id: 'api', label: 'API', x: 340, y: 150 },
     ]
 
-    let html = ''
+    // Use DOMParser so SVG SMIL elements are parsed in the correct namespace
+    const ns = 'http://www.w3.org/2000/svg'
+
+    // Links + animated packets
     nodes.forEach((n, idx) => {
       if (idx === 3) return
       const dur = (Math.random() * 2 + 2).toFixed(1)
-      html += `<line x1="${nodes[3].x}" y1="${nodes[3].y}" x2="${n.x}" y2="${n.y}" class="diagram-link" id="link-${n.id}" />`
-      html += `<circle class="packet" id="pkt-${n.id}">
-        <animateMotion dur="${dur}s" repeatCount="indefinite" path="M ${nodes[3].x},${nodes[3].y} L ${n.x},${n.y}" />
-      </circle>`
+
+      const line = document.createElementNS(ns, 'line')
+      line.setAttribute('x1', nodes[3].x)
+      line.setAttribute('y1', nodes[3].y)
+      line.setAttribute('x2', n.x)
+      line.setAttribute('y2', n.y)
+      line.setAttribute('class', 'diagram-link')
+      svg.appendChild(line)
+
+      const circle = document.createElementNS(ns, 'circle')
+      circle.setAttribute('class', 'packet')
+      circle.setAttribute('r', '4')
+      const motion = document.createElementNS(ns, 'animateMotion')
+      motion.setAttribute('dur', `${dur}s`)
+      motion.setAttribute('repeatCount', 'indefinite')
+      motion.setAttribute('path', `M ${nodes[3].x},${nodes[3].y} L ${n.x},${n.y}`)
+      circle.appendChild(motion)
+      svg.appendChild(circle)
     })
+
+    // Nodes (drawn on top of links)
     nodes.forEach((n) => {
       const r = n.glow ? 14 : 10
-      const extraStyle = n.glow ? 'style="stroke: var(--red-bright);"' : ''
-      html += `<g class="diagram-node">
-        <circle cx="${n.x}" cy="${n.y}" r="${r}" ${extraStyle} />
-        <text x="${n.x}" y="${n.y + 24}" text-anchor="middle">${n.label}</text>
-      </g>`
+      const g = document.createElementNS(ns, 'g')
+      g.setAttribute('class', 'diagram-node')
+
+      const circle = document.createElementNS(ns, 'circle')
+      circle.setAttribute('cx', n.x)
+      circle.setAttribute('cy', n.y)
+      circle.setAttribute('r', r)
+      if (n.glow) circle.style.stroke = 'var(--red-bright)'
+
+      const text = document.createElementNS(ns, 'text')
+      text.setAttribute('x', n.x)
+      text.setAttribute('y', n.y + 24)
+      text.setAttribute('text-anchor', 'middle')
+      text.textContent = n.label
+
+      g.appendChild(circle)
+      g.appendChild(text)
+      svg.appendChild(g)
     })
-    svg.innerHTML = html
   }, [])
 
   return (

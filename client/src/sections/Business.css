@@ -248,12 +248,8 @@
 
 .packet {
   fill: var(--gold);
-  r: 2;
-  opacity: 0;
-}
-
-.packet.active {
-  opacity: 1;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 3px var(--gold));
 }
 
 /* ── Responsive ── */
