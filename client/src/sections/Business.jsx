@@ -217,7 +217,7 @@ export default function Business() {
               <li>Compliance-aware automation with full audit log and rollback</li>
               <li>Custom MCP integrations into existing banking and ERP systems</li>
               <li>Internal AI tools for Java development teams (code review, doc gen)</li>
-              <li>Multilingual systems — Hebrew RTL, English, Ukrainian, Russian</li>
+              <li>Multilingual systems — Hebrew RTL, English, Ukrainian, Polish, German, French</li>
             </ul>
             <div className="split-price-badge">【 Custom pricing · NDA available · On-premises deployment option 】</div>
           </div>

@@ -1,9 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './Contact.css'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const reveals = sectionRef.current?.querySelectorAll('.reveal')
+    if (!reveals) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target
+            const delay = el.dataset.delay || '0ms'
+            el.style.setProperty('--delay', delay)
+            el.classList.add('revealed')
+            observer.unobserve(el)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+    reveals.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -12,7 +34,7 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact-section" id="contact">
+    <section className="contact-section" id="contact" ref={sectionRef}>
       <div className="watermark jetbrains">08</div>
       <div className="contact-glow"></div>
       <div className="container relative">

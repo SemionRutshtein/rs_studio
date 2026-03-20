@@ -20,7 +20,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Do your systems support Hebrew and RTL layout?',
-    answer: 'Yes — natively. All our bots support Hebrew, including proper RTL text handling in interfaces. We also support English, Ukrainian, and Russian. We understand the local Israeli business context, local ERP systems, and regional compliance requirements.',
+    answer: 'Yes — natively. All our bots support Hebrew, including proper RTL text handling in interfaces. We also support English, Ukrainian, Polish, German, and French. We understand the local Israeli business context, local ERP systems, and regional compliance requirements.',
   },
   {
     question: 'What happens if something breaks after launch?',
