@@ -36,6 +36,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -44,6 +45,8 @@ body {
   font-family: var(--font-ui);
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
 }
 
 a {
@@ -387,6 +390,23 @@ a:hover .logo-svg {
 }
 
 @media (max-width: 768px) {
+  /* Reduce section padding on mobile */
+  .section-padding {
+    padding: 60px 0;
+  }
+
+  /* Disable expensive glow filters on mobile */
+  .div-glow,
+  .section-glow,
+  .contact-glow {
+    display: none;
+  }
+
+  /* Reduce watermark opacity — still decorative but less paint cost */
+  .watermark {
+    opacity: 0.03;
+  }
+
   .nav-links {
     position: fixed;
     top: 0;

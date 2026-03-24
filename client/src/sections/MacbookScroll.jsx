@@ -18,8 +18,9 @@ export default function MacbookScroll() {
 
     let triggers = []
 
-    // Fix mobile browser address-bar resize jank
-    ScrollTrigger.normalizeScroll(true)
+    // normalizeScroll intercepts native scroll on mobile — causes jank. Desktop only.
+    const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    if (!isMobileDevice) ScrollTrigger.normalizeScroll(true)
 
     function initVideoScroll() {
       // Scrub video currentTime to scroll progress
@@ -119,7 +120,7 @@ export default function MacbookScroll() {
     }
 
     return () => {
-      ScrollTrigger.normalizeScroll(false)
+      if (!isMobileDevice) ScrollTrigger.normalizeScroll(false)
       document.removeEventListener('touchstart', iosUnlock)
       video.removeEventListener('loadedmetadata', initVideoScroll)
       triggers.forEach(t => t && t.kill && t.kill())

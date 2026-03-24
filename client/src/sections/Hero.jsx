@@ -25,20 +25,28 @@ export default function Hero() {
     let particles = []
     let mouse = { x: -1000, y: -1000 }
     let rafId = null
+    let resizeTimer = null
+    const isMobile = window.innerWidth < 768
 
     function resize() {
-      width = canvas.width = window.innerWidth
-      height = canvas.height = window.innerHeight
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        width = canvas.width = window.innerWidth
+        height = canvas.height = window.innerHeight
+      }, 100)
     }
 
-    window.addEventListener('resize', resize)
-    resize()
+    // Initial size — set immediately
+    width = canvas.width = window.innerWidth
+    height = canvas.height = window.innerHeight
+
+    window.addEventListener('resize', resize, { passive: true })
 
     const onMouseMove = (e) => {
       mouse.x = e.clientX
       mouse.y = e.clientY
     }
-    window.addEventListener('mousemove', onMouseMove)
+    if (!isMobile) window.addEventListener('mousemove', onMouseMove, { passive: true })
 
     class Particle {
       constructor() {
@@ -86,7 +94,7 @@ export default function Hero() {
       }
     }
 
-    const particleCount = window.innerWidth < 768 ? 40 : 90
+    const particleCount = isMobile ? 25 : 90
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
     }
@@ -96,17 +104,20 @@ export default function Hero() {
       for (let i = 0; i < particles.length; i++) {
         particles[i].update()
         particles[i].draw()
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 130) {
-            ctx.beginPath()
-            ctx.strokeStyle = `rgba(192, 57, 43, ${1 - dist / 130})`
-            ctx.lineWidth = 1
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.stroke()
+        // Skip O(n²) connection lines on mobile — too expensive
+        if (!isMobile) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x
+            const dy = particles[i].y - particles[j].y
+            const dist = Math.sqrt(dx * dx + dy * dy)
+            if (dist < 130) {
+              ctx.beginPath()
+              ctx.strokeStyle = `rgba(192, 57, 43, ${1 - dist / 130})`
+              ctx.lineWidth = 1
+              ctx.moveTo(particles[i].x, particles[i].y)
+              ctx.lineTo(particles[j].x, particles[j].y)
+              ctx.stroke()
+            }
           }
         }
       }
@@ -117,7 +128,8 @@ export default function Hero() {
 
     return () => {
       window.removeEventListener('resize', resize)
-      window.removeEventListener('mousemove', onMouseMove)
+      if (!isMobile) window.removeEventListener('mousemove', onMouseMove)
+      clearTimeout(resizeTimer)
       if (rafId) cancelAnimationFrame(rafId)
     }
   }, [])
