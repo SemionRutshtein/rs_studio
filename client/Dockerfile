@@ -1,15 +1,19 @@
 # Stage 1: build
-# Note: build context is repo root (set in docker-compose.yml)
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY client/package*.json ./
+COPY package*.json ./
 RUN npm ci
-COPY client/ .
+COPY . .
 RUN npm run build
 
 # Stage 2: serve
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
+# Defaults for local docker-compose; Railway overrides PORT and SERVER_URL
+ENV PORT=80
+ENV SERVER_URL=http://server:3001
+# Only substitute our placeholders so nginx variables ($host etc.) are preserved
+ENV NGINX_ENVSUBST_FILTER=^(PORT|SERVER_URL)$
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
